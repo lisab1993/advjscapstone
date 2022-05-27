@@ -1,0 +1,24 @@
+{
+  "name": "advjscapstone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "outline.js",
+  "scripts": {
+    "concurrent": "concurrently -p [{name}] -c bgBlue.bold,bgGreen.bold -n backend,frontend",
+    "start": "npm run concurrent \"cd backend && npm start\" \"cd frontend && cd capstoneapp && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lisab1993/advjscapstone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lisab1993/advjscapstone/issues"
+  },
+  "homepage": "https://github.com/lisab1993/advjscapstone#readme",
+  "dependencies": {
+    "concurrently": "^7.2.1"
+  }
+}
