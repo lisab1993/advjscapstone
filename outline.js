@@ -21,7 +21,6 @@
 // type: (start, end, story) -string
 // story: object id
 // body: string
-// scenario: string
 // option 1: string
 // option 1 health impact: number
 // option 2: string
