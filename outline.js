@@ -22,9 +22,10 @@
 // story: object id
 // body: string
 // option 1: string
-// option 1 health impact: number
 // option 2: string
-//option 2 health impact: number
+//one of these is the correct answer, the other rips a page. If the boolean is true, it's a ripped page
+// option 1 impact: boolean
+//option 2 impact: boolean
 
 //Theme
 // (ocean, medieval, space, post-apocalyptic)
