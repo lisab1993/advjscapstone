@@ -26,12 +26,13 @@ const pageSchema = Schema(
             type: String,
             required: true
         },
+        //one of these is the correct answer, the other rips a page. If the boolean is true, it's a ripped page
         optionOneImpact: {
-            type: Number,
+            type: boolean,
             required: true
         },
         optionTwoImpact: {
-            type: Number,
+            type: boolean,
             required: true
         },
     }
