@@ -37,8 +37,18 @@ const storySchema = Schema(
     toObject: {
       virtuals: true,
     },
+    toJSON: {
+      virtuals: true
+    }
   }
 );
+
+storySchema.virtual("pages", {
+  ref: "Page",
+  localField: "_id",
+  foreignField: "story",
+  justOne: false //create a list of pages related to a story
+})
 
 
 const Story = mongoose.model("Story", storySchema);

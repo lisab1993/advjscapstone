@@ -5,8 +5,8 @@ const { ObjectId } = Schema.Types;
 
 const pageSchema = Schema(
     {
-        type: {
-            type: String,
+        pageNumber: {
+            type: Number,
             required: true
         },
         story: {
@@ -28,11 +28,11 @@ const pageSchema = Schema(
         },
         //one of these is the correct answer, the other rips a page. If the boolean is true, it's a ripped page
         optionOneImpact: {
-            type: boolean,
+            type: Boolean,
             required: true
         },
         optionTwoImpact: {
-            type: boolean,
+            type: Boolean,
             required: true
         },
     }

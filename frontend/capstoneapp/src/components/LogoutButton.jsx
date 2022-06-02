@@ -6,10 +6,12 @@ const LogoutButton = (props) => {
 
   const [token, setToken] = useGlobal("token")
   const [user, setUser] = useGlobal("user")
+  const [game, setGame] = useGlobal("game")
 
   const handleClick = () => {
     setToken(null)
     setUser(null)
+    setGame(null)
   }
 
   return (

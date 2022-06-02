@@ -18,7 +18,7 @@
 // theme -object id
 
 //Page
-// type: (start, end, story) -string
+// tpageNumber: number
 // story: object id
 // body: string
 // option 1: string

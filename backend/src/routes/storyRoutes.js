@@ -17,7 +17,7 @@ router.post("/", [jwtMiddleware, handleValidationErrors], async(req, res) => {
 
 //Retrieve
 router.get("/:id", async (req, res) => {
-    const story = await Story.findOne({ _id: req.params.id });
+    const story = await Story.findOne({ _id: req.params.id }).populate({path: "pages"});
     res.send(story);
   });
 
@@ -51,7 +51,7 @@ router.delete("/:id", [jwtMiddleware, handleValidationErrors], async (req, res) 
 
 //List
 router.get("/", async (req, res) => {
-    const stories = await Story.find();
+    const stories = await Story.find().populate({path: "pages"});
     res.send(stories);
   });
 

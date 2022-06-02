@@ -13,7 +13,8 @@ function App() {
 
     return {
       token: null,
-      user: null
+      user: null,
+      game: null
     }
   }
 

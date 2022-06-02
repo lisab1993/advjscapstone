@@ -1,9 +1,11 @@
 import {Link} from "react-router-dom"
+import QuickStartButton from "../components/QuickStartButton"
 
 const HomePage = () => {
+
   return (
     <div>HomePage
-      <Link to="/game" >Quick Start</Link>
+      <QuickStartButton></QuickStartButton>
     </div>
   )
 }

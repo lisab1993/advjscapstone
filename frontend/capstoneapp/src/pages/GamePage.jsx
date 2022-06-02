@@ -1,7 +1,9 @@
-import React from "react";
 import Game from "../components/Game";
+import { useEffect } from "reactn";
 
-const GamePage = () => {
+const GamePage = (props) => {
+
+
   return (
     <>
       <Game />
