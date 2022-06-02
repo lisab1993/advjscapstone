@@ -13,7 +13,10 @@ const Game = () => {
   const [counter, setCounter] = useState(1)//which page the user is on
   const [pageCount, setPageCount] = useState(0)//how many pages exist
 
-  const [currentPage, setCurrentPage] = useState({})
+  const [currentPage, setCurrentPage] = useState({})//object of the currently displayed page
+  const [hasChosen, setHasChosen] = useState(false)//has the player picked an option yet
+  const [selectionRes, setSelectionRes] = useState('')//the page's response to a right or wrong answer
+
 
 
   const getStoryData = async () => {
@@ -35,6 +38,7 @@ const Game = () => {
     } catch (err) {
       console.log(err)
     }
+
   }
 
   const checkStuff = async () => {
@@ -43,8 +47,9 @@ const Game = () => {
     // console.log(pagesData, 'pagesData')
     // console.log(first, 'first page')
     // console.log(last, 'last page')
-    console.log(counter, 'counter')
-    console.log(pageCount, 'page count')
+    // console.log(counter, 'counter')
+    // console.log(pageCount, 'page count')
+    console.log(currentPage)
   }
 
   //The randInt and randomChoice functions were taken from class lemur's repo: https://tinyurl.com/muhbr72c
@@ -60,19 +65,16 @@ const Game = () => {
   const upCounter = () => {
     //increases the state counter by 1
     setCounter(counter + 1)
-
     //this runs before the counter updates, so the -1 keeps it synchronized
     if (counter < pageCount - 1) {
       let randPage = randomChoice(pages)
       setCurrentPage(randPage)
       let randIndex = pages.indexOf(randPage)
       pages.splice(randIndex, 1)
-      // console.log(randPage, 'randpage')
-      // console.log(pages, 'pages')
-      // console.log('\n \n')
     } else {
       setCurrentPage(lastPage)
     }
+    setHasChosen(false)
   }
 
   useEffect(() => {
@@ -80,26 +82,62 @@ const Game = () => {
   }, [])
 
   const judgeAnswer = (selection) => {
-    //the selection will be either 1 or 2
-    //variable to hold option 1's boolean
-    //variable to hold option 2's boolean
-    //compare them
-  }
+    let oneRes = currentPage.optionOneImpact
+    let twoRes = currentPage.optionTwoImpact
+    let response = ''
 
+    if (selection === 1 && oneRes === true) {
+      //correct answer was 1, and user chose 1
+      response = currentPage.optionOneImpactStatement
+      setSelectionRes(response)
+    } 
+    else if (selection === 1 && oneRes === false) {
+      //correct answer was 2, but user chose 1
+      response = currentPage.optionOneImpactStatement
+      setRips(rips - 1)
+      setSelectionRes(response)
+    }
+    else if (selection === 2 && twoRes === true) {
+      //correct answer was 2, and user chose 2
+      response = currentPage.optionTwoImpactStatement
+      setSelectionRes(response)
+    }
+    else {
+      //correct answer was 1, but user chose 2
+      response = currentPage.optionTwoImpactStatement
+      setRips(rips - 1)
+      setSelectionRes(response)
+    }
+    setHasChosen(true)
+  }
 
 
   return (
     <>
-      {/* <button onClick={checkStuff}>Check Stuff</button> */}
+      <button onClick={checkStuff}>Check Stuff</button>
+      {/* the game */}
+      {rips > 0 && counter <= pageCount &&
+        <div className="border-2 border-solid border-black">
+          <p> The situation: {currentPage.body}</p>
+          <p><button onClick={() => judgeAnswer(1)}>{currentPage.optionOne}</button></p>
+          <p><button onClick={() => judgeAnswer(2)}>{currentPage.optionTwo}</button></p>
+          <p>Page {currentPage.pageNumber}</p>
+          {hasChosen === true &&
+            <div>
+              <p><button className="bg-teal-300" onClick={upCounter}>Next Page</button></p>
+              <p>{selectionRes}</p>
+            </div>}
+        </div>
+      }
 
-      <div className="border-2 border-solid border-black">
-        <p> The situation: {currentPage.body}</p>
-        <button onClick={judgeAnswer(1)}>{currentPage.optionOne}</button>
-        <button onClick={judgeAnswer(2)}>{currentPage.optionTwo}</button>
-        <p>Page {currentPage.pageNumber}</p>
-          {counter < pageCount && <p><button className="bg-teal-300" onClick={upCounter}>Next Page</button></p>}
-        
-      </div>
+      {rips > 0 && counter > pageCount && <div>you win!</div>}
+
+      {/* losing screen */}
+      {rips === 0 && <div>Sorry, you lose</div>}
+
+      {/* winning screen */}
+      {/* they win if rips are greater than 0 and the last page was played */}
+
 
       {/* Errors allowed */}
       <h1>Rips Remaining: {rips}</h1>

@@ -36,6 +36,14 @@ const pageSchema = Schema(
             type: Boolean,
             required: true
         },
+        optionOneImpactStatement: {
+            type: String,
+            required: true
+        },
+        optionTwoImpactStatement: {
+            type: String,
+            required: true
+        },
     }
 )
 
