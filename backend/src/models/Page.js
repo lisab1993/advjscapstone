@@ -26,7 +26,8 @@ const pageSchema = Schema(
             type: String,
             required: true
         },
-        //one of these is the correct answer, the other rips a page. If the boolean is true, it's a ripped page
+        //one of these is the correct answer, the other rips a page. 
+        //if the boolean is true, the answer is correct; false is incorrect
         optionOneImpact: {
             type: Boolean,
             required: true

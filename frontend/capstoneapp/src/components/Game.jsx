@@ -13,6 +13,7 @@ const Game = () => {
   const [counter, setCounter] = useState(1)//which page the user is on
   const [pageCount, setPageCount] = useState(0)//how many pages exist
 
+  const [currentPage, setCurrentPage] = useState({})
 
 
   const getStoryData = async () => {
@@ -22,16 +23,15 @@ const Game = () => {
       const storyData = data.data
       setStory(storyData)
       setRips(storyData.ripsAllowed)
-      
+
       const pagesData = data.data.pages
-      setPages(pagesData)
       setPageCount(pagesData.length)
       const last = pagesData.pop()
       const first = (pagesData.splice(0, 1))[0]
       setFirstPage(first)
+      setCurrentPage(first)
       setLastPage(last)
-
-
+      setPages(pagesData)
     } catch (err) {
       console.log(err)
     }
@@ -39,51 +39,69 @@ const Game = () => {
 
   const checkStuff = async () => {
     //check state when a button is clicked
-    console.log(story, 'story data')
+    // console.log(story, 'story data')
     // console.log(pagesData, 'pagesData')
     // console.log(first, 'first page')
     // console.log(last, 'last page')
     console.log(counter, 'counter')
+    console.log(pageCount, 'page count')
+  }
+
+  //The randInt and randomChoice functions were taken from class lemur's repo: https://tinyurl.com/muhbr72c
+  const randint = (a, b) => {
+    return Math.floor(a + Math.random() * (b - a + 1))
+  }
+
+  const randomChoice = (arr) => {
+    let i = randint(0, arr.length - 1)
+    return arr[i]
   }
 
   const upCounter = () => {
     //increases the state counter by 1
     setCounter(counter + 1)
+
+    //this runs before the counter updates, so the -1 keeps it synchronized
+    if (counter < pageCount - 1) {
+      let randPage = randomChoice(pages)
+      setCurrentPage(randPage)
+      let randIndex = pages.indexOf(randPage)
+      pages.splice(randIndex, 1)
+      // console.log(randPage, 'randpage')
+      // console.log(pages, 'pages')
+      // console.log('\n \n')
+    } else {
+      setCurrentPage(lastPage)
+    }
   }
-
-
-
 
   useEffect(() => {
     getStoryData()
   }, [])
 
+  const judgeAnswer = (selection) => {
+    //the selection will be either 1 or 2
+    //variable to hold option 1's boolean
+    //variable to hold option 2's boolean
+    //compare them
+  }
+
+
 
   return (
     <>
-      <button onClick={checkStuff}>Check Stuff</button>
-      {/* first page */}
-      {counter === 1 &&
-        <div>
-          <p>{firstPage.body}</p>
-          <p>Page: {firstPage.pageNumber}</p>
-          <button onClick={upCounter}>Next Page</button>
-        </div>}
+      {/* <button onClick={checkStuff}>Check Stuff</button> */}
 
-      {/* pages between first and last */}
-      {counter > 1 && counter < pageCount &&
-        <div>it worked {counter}
-          <button onClick={upCounter}>Next Page</button>
-        </div>}
+      <div className="border-2 border-solid border-black">
+        <p> The situation: {currentPage.body}</p>
+        <button onClick={judgeAnswer(1)}>{currentPage.optionOne}</button>
+        <button onClick={judgeAnswer(2)}>{currentPage.optionTwo}</button>
+        <p>Page {currentPage.pageNumber}</p>
+          {counter < pageCount && <p><button className="bg-teal-300" onClick={upCounter}>Next Page</button></p>}
+        
+      </div>
 
-      {/* last page */}
-      {counter === pageCount &&
-        <div>
-          <p>{lastPage.body}</p>
-          <p>Page: {lastPage.pageNumber}</p>
-        </div>}
-
-        {/* Errors allowed */}
+      {/* Errors allowed */}
       <h1>Rips Remaining: {rips}</h1>
     </>
   )
