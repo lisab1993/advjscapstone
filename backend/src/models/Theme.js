@@ -12,23 +12,18 @@ const themeSchema = Schema(
     },
     backgroundImage: {
       type: String,
-      required: true,
     },
     bookImage: {
       type: String,
-      required: true,
     },
     pageImage: {
       type: String,
-      required: true,
     },
     winningBackground: {
       type: String,
-      required: true,
     },
     losingBackground: {
       type: String,
-      required: true,
     },
   },
   {

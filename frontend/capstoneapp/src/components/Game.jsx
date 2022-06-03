@@ -8,6 +8,7 @@ const Game = () => {
   const [firstPage, setFirstPage] = useState({})//object with the first page info
   const [lastPage, setLastPage] = useState({})//object with last page info
   const [rips, setRips] = useState(0)//how many wrong answers are allowed
+  const [theme, setTheme] = useState('')//current theme
 
   const [pages, setPages] = useState([])//every page for the story, including first and last
   const [counter, setCounter] = useState(1)//which page the user is on
@@ -24,6 +25,9 @@ const Game = () => {
       //get the selected story and its pages
       const data = await axios.get(`http://localhost:1300/story/${game}`)
       const storyData = data.data
+      const getTheme = await axios.get(`http://localhost:1300/theme/${storyData.theme}`)
+      const themeData = getTheme.data
+      setTheme(themeData)
       setStory(storyData)
       setRips(storyData.ripsAllowed)
 
@@ -43,13 +47,7 @@ const Game = () => {
 
   const checkStuff = async () => {
     //check state when a button is clicked
-    // console.log(story, 'story data')
-    // console.log(pagesData, 'pagesData')
-    // console.log(first, 'first page')
-    // console.log(last, 'last page')
-    // console.log(counter, 'counter')
-    // console.log(pageCount, 'page count')
-    console.log(currentPage)
+    console.log(theme, 'theme')
   }
 
   //The randInt and randomChoice functions were taken from class lemur's repo: https://tinyurl.com/muhbr72c
@@ -111,17 +109,21 @@ const Game = () => {
     setHasChosen(true)
   }
 
-
+  //add this before every image in the db
+  // https://drive.google.com/uc?export=view&id=
+  //
   return (
     <>
-      <button onClick={checkStuff}>Check Stuff</button>
+      {/* <button onClick={checkStuff}>Check Stuff</button> */}
       {/* the game */}
       {rips > 0 && counter <= pageCount &&
-        <div className="border-2 border-solid border-black">
-          <p> The situation: {currentPage.body}</p>
-          <p><button onClick={() => judgeAnswer(1)}>{currentPage.optionOne}</button></p>
-          <p><button onClick={() => judgeAnswer(2)}>{currentPage.optionTwo}</button></p>
-          <p>Page {currentPage.pageNumber}</p>
+        <div className="border-solid border-2 border-black relative text-center ">
+          <img src={theme.backgroundImage} className="absolute w-screen h-max"/>
+          {/* <p className="absolute text-white"> The situation: {currentPage.body}</p>
+          <p><button disabled={hasChosen === true} onClick={() => judgeAnswer(1)}>{currentPage.optionOne}</button></p>
+          <p><button disabled={hasChosen === true} onClick={() => judgeAnswer(2)}>{currentPage.optionTwo}</button></p>
+          <p>Page {currentPage.pageNumber}</p> */}
+          <p><img src={theme.bookImage} className="absolute w-5/6"/></p>
           {hasChosen === true &&
             <div>
               <p><button className="bg-teal-300" onClick={upCounter}>Next Page</button></p>
