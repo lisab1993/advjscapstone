@@ -5,6 +5,8 @@ import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
 import Navbar from "./components/Navbar";
+import PremisePage from "./pages/PremisePage";
+import HowToPage from "./pages/HowToPage"
 
 function App() {
   const rehydrateState = () => {
@@ -14,7 +16,8 @@ function App() {
     return {
       token: null,
       user: null,
-      game: null
+      game: null,
+      theme: null
     }
   }
 
@@ -33,6 +36,8 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/game" element={<GamePage />} />
       <Route path="*" />
+      <Route path="/premise" element={<PremisePage />} />
+      <Route path='/howto' element={<HowToPage />} />
     </Routes>
   </Router>
   )

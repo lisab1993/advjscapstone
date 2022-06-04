@@ -16,7 +16,7 @@ const themeSchema = Schema(
     bookImage: {
       type: String,
     },
-    pageImage: {
+    premiseBackground: {
       type: String,
     },
     winningBackground: {

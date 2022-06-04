@@ -2,14 +2,21 @@ import { useState, useGlobal, useEffect } from "reactn";
 import { Navigate, Link } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
+import LeftPage from "./LeftPage";
+import RightPage from "./RightPage";
+import WinningScreen from "./WinningScreen";
+import LosingScreen from "./LosingScreen";
+
 
 const Game = () => {
   const [game, setGame] = useGlobal("game"); //story id
+
+
   const [story, setStory] = useState({}); //object with story info
   const [firstPage, setFirstPage] = useState({}); //object with the first page info
   const [lastPage, setLastPage] = useState({}); //object with last page info
   const [rips, setRips] = useState(0); //how many wrong answers are allowed
-  const [theme, setTheme] = useState(""); //current theme
+  const [theme, setTheme] = useGlobal("theme"); //current theme
 
   const [pages, setPages] = useState([]); //every page for the story, including first and last
   const [counter, setCounter] = useState(1); //which page the user is on
@@ -19,16 +26,17 @@ const Game = () => {
   const [hasChosen, setHasChosen] = useState(false); //has the player picked an option yet
   const [selectionRes, setSelectionRes] = useState(""); //the page's response to a right or wrong answer
 
+
   const getStoryData = async () => {
     try {
       //get the selected story and its pages
       const data = await axios.get(`http://localhost:1300/story/${game}`);
       const storyData = data.data;
-      const getTheme = await axios.get(
-        `http://localhost:1300/theme/${storyData.theme}`
-      );
-      const themeData = getTheme.data;
-      setTheme(themeData);
+      // const getTheme = await axios.get(
+      //   `http://localhost:1300/theme/${storyData.theme}`
+      // );
+      // const themeData = getTheme.data;
+      // setTheme(themeData);
       setStory(storyData);
       setRips(storyData.ripsAllowed);
 
@@ -111,33 +119,39 @@ const Game = () => {
   return (
     <>
       {/* <button onClick={checkStuff}>Check Stuff</button> */}
+      {rips > 0 && counter <= pageCount && (
+        <div
+          className="bg-cover bg-no-repeat h-screen flex-auto relative"
+          style={{ backgroundImage: `url(${theme.backgroundImage})` }}
+        >
+          <Navbar />
+          {/* book image */}
+          <p className="absolute">
+            <img src={theme.bookImage} className="w-7/12 mx-auto" />
+          </p>
 
+          {/* left page */}
+          {/* 763 chars for the body */}
+          {/* 412 for the choices */}
+          {/* 800 ish for the results */}
+          <LeftPage
+            currentPage={currentPage}
+            hasChosen={hasChosen}
+            judgeAnswer={judgeAnswer}
+          />
+
+          {/* right page */}
+          {hasChosen === true && (
+            <RightPage selectionRes={selectionRes} upCounter={upCounter} />
+          )}
+        </div>
+      )}
 
       {/* winning screen */}
-      {/* {rips > 0 && counter > pageCount && ( */}
-        <div
-          className="h-screen bg-cover bg-no-repeat flex-auto "
-          style={{ backgroundImage: `url(${theme.winningBackground})` }}
-        >
-          <Navbar />
-          <div className="bg-neutral-700 text-white w-[35rem] mx-auto mt-96 text-center pt-20 h-1/4 rounded-lg">
-            <span className="text-2xl font-bold">You won!</span>
-          </div>
-        </div>
-      {/* )} */}
+      {rips > 0 && counter > pageCount && <WinningScreen theme={theme} />}
 
       {/* losing screen */}
-      {/* {rips === 5 && (
-        <div
-          className="h-screen bg-cover bg-no-repeat flex-auto "
-          style={{ backgroundImage: `url(${theme.losingBackground})` }}
-        >
-          <Navbar />
-          <div className="bg-neutral-700 text-white w-[35rem] mx-auto mt-96 text-center pt-20 h-1/4 rounded-lg">
-            <span className="text-2xl font-bold">Sorry, you lose</span>
-          </div>
-        </div>
-      )} */}
+      {rips === 0 && <LosingScreen theme={theme} />}
     </>
   );
 };

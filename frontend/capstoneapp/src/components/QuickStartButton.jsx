@@ -10,7 +10,7 @@ const QuickStartButton = () => {
     }
 
     return (
-        <button onClick={(event) => handleClick(event)}><Link to="/game" >Quick Start -Space</Link></button>
+        <button onClick={(event) => handleClick(event)}><Link to="/premise" >Quick Start -Space</Link></button>
         
     )
 }
