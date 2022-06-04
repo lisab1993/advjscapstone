@@ -42,5 +42,55 @@
 // password
 
 
-//for the themes
-//
+// {rips > 0 && counter <= pageCount && (
+//     <div
+//       className="bg-cover bg-no-repeat h-screen flex-auto relative"
+//       style={{ backgroundImage: `url(${theme.backgroundImage})` }}
+//     >
+//       <Navbar />
+//       {/* book image */}
+//       <p className="absolute">
+//         <img src={theme.bookImage} className="w-7/12 mx-auto" />
+//       </p>
+
+//       {/* left page */}
+//       <div className="w-[31rem] absolute left-[25.5rem] top-16 -skew-y-2 mr-5 px-5">
+//         <p className="mb-3"> The situation: {currentPage.body}</p>
+//         <p className="ml-56">~choose~</p>
+//         <button
+//           disabled={hasChosen === true}
+//           onClick={() => judgeAnswer(1)}
+//           className={hasChosen === true ? "bg-red" : "hover:font-bold"}
+//         >
+//           - {currentPage.optionOne}
+//         </button>
+//         <p>
+//           <button
+//             disabled={hasChosen === true}
+//             onClick={() => judgeAnswer(2)}
+//             className={hasChosen === true ? "bg-red" : "hover:font-bold"}
+//           >
+//             - {currentPage.optionTwo}
+//           </button>
+//         </p>
+//       </div>
+//       {/* page number */}
+//       <p className="absolute left-[40rem] bottom-[8rem] -skew-y-3">
+//         Page {currentPage.pageNumber}
+//       </p>
+//       {/* results on right of page */}
+//       {hasChosen === true && (
+//         <>
+//           <p className="absolute w-[31rem] right-[25.5rem] skew-y-1 px-5 top-16">
+//             {selectionRes}
+//           </p>
+//           <button
+//             className="hover:font-bold absolute right-[40rem] bottom-[8rem] skey-y-1"
+//             onClick={upCounter}
+//           >
+//             Next Page
+//           </button>
+//         </>
+//       )}
+//     </div>
+//   )}

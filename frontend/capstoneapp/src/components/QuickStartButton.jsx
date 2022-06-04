@@ -6,11 +6,11 @@ const QuickStartButton = () => {
 
     const handleClick = (event) => {
         event.preventDefault();
-            setGame("6296903320f437987e1cc4d6")
+            setGame("62983e21603234480ebed1a3")
     }
 
     return (
-        <button onClick={(event) => handleClick(event)}><Link to="/game" >Quick Start</Link></button>
+        <button onClick={(event) => handleClick(event)}><Link to="/game" >Quick Start -Space</Link></button>
         
     )
 }

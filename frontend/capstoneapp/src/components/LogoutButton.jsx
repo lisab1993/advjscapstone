@@ -17,7 +17,7 @@ const LogoutButton = (props) => {
   return (
     <>
       {!user && <Navigate replace to={props.to || "/"} />}
-      <button onClick={handleClick}>Logout</button>
+      <button className="text-white my-auto" onClick={handleClick}>Logout</button>
     </>
   )
 }
