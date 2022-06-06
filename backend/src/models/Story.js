@@ -20,6 +20,11 @@ const storySchema = Schema(
       required: true,
       default: false,
     },
+    anonymous: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
     ripsAllowed: {
       type: Number,
       required: true,

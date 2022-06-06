@@ -15,7 +15,13 @@ const Navbar = () => {
           <Link to="/login">Login</Link>
         </>
       )}
-      {user && <LogoutButton to="/">Logout</LogoutButton>}
+      {user && 
+      <><LogoutButton to="/">Logout</LogoutButton>
+      <Link className="text-white" to="/profile">Profile</Link>
+      <Link className="text-white" to="/create">Create</Link>
+      </>
+      
+      }
     </nav>
   );
 };

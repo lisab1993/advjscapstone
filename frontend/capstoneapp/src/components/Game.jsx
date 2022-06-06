@@ -32,11 +32,6 @@ const Game = () => {
       //get the selected story and its pages
       const data = await axios.get(`http://localhost:1300/story/${game}`);
       const storyData = data.data;
-      // const getTheme = await axios.get(
-      //   `http://localhost:1300/theme/${storyData.theme}`
-      // );
-      // const themeData = getTheme.data;
-      // setTheme(themeData);
       setStory(storyData);
       setRips(storyData.ripsAllowed);
 
@@ -87,6 +82,8 @@ const Game = () => {
     getStoryData();
   }, []);
 
+  
+
   const judgeAnswer = (selection) => {
     let oneRes = currentPage.optionOneImpact;
     let twoRes = currentPage.optionTwoImpact;
@@ -131,9 +128,7 @@ const Game = () => {
           </p>
 
           {/* left page */}
-          {/* 763 chars for the body */}
-          {/* 412 for the choices */}
-          {/* 800 ish for the results */}
+          {/* note: on the component- don't always have option 1 at the top; the player might always write their good option on top, or vice versa, so randomizing the two will keep it fun */}
           <LeftPage
             currentPage={currentPage}
             hasChosen={hasChosen}

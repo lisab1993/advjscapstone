@@ -1,5 +1,7 @@
 
 const RightPage = (props) => {
+  //props used: selectionRes and upCounter
+  
   return (
     <>
     <p className="absolute w-[31rem] right-[25.5rem] skew-y-1 rotate-1 px-5 top-16">

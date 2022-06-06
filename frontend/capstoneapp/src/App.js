@@ -4,9 +4,10 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import GamePage from "./pages/GamePage";
-import Navbar from "./components/Navbar";
 import PremisePage from "./pages/PremisePage";
 import HowToPage from "./pages/HowToPage"
+import Profile from "./components/Profile";
+import CreationPage from "./pages/CreationPage";
 
 function App() {
   const rehydrateState = () => {
@@ -38,6 +39,8 @@ function App() {
       <Route path="*" />
       <Route path="/premise" element={<PremisePage />} />
       <Route path='/howto' element={<HowToPage />} />
+      <Route path="/create" element={<CreationPage />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   </Router>
   )
