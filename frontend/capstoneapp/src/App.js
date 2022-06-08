@@ -8,6 +8,7 @@ import PremisePage from "./pages/PremisePage";
 import HowToPage from "./pages/HowToPage"
 import Profile from "./components/Profile";
 import CreationPage from "./pages/CreationPage";
+import CreateStoryPage from "./components/CreateStoryPage";
 
 function App() {
   const rehydrateState = () => {
@@ -41,6 +42,7 @@ function App() {
       <Route path='/howto' element={<HowToPage />} />
       <Route path="/create" element={<CreationPage />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/createPage" element={<CreateStoryPage />} />
     </Routes>
   </Router>
   )

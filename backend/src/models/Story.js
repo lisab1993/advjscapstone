@@ -17,13 +17,11 @@ const storySchema = Schema(
     },
     private: {
       type: Boolean,
-      required: true,
       default: false,
     },
     anonymous: {
       type: Boolean,
-      required: true,
-      default: false
+      default: false,
     },
     ripsAllowed: {
       type: Number,
@@ -34,8 +32,11 @@ const storySchema = Schema(
       required: true,
     },
     theme: {
-        type: ObjectId,
-        ref: "Theme"
+      type: ObjectId,
+      ref: "Theme",
+    },
+    complete: {
+      type: Boolean
     }
   },
   {
@@ -43,8 +44,8 @@ const storySchema = Schema(
       virtuals: true,
     },
     toJSON: {
-      virtuals: true
-    }
+      virtuals: true,
+    },
   }
 );
 
@@ -52,9 +53,8 @@ storySchema.virtual("pages", {
   ref: "Page",
   localField: "_id",
   foreignField: "story",
-  justOne: false //create a list of pages related to a story
-})
-
+  justOne: false, //create a list of pages related to a story
+});
 
 const Story = mongoose.model("Story", storySchema);
 module.exports = Story;
