@@ -36,8 +36,14 @@ const storySchema = Schema(
       ref: "Theme",
     },
     complete: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
+    winningMessage: {
+      type: String,
+    },
+    losingMessage: {
+      type: String,
+    },
   },
   {
     toObject: {

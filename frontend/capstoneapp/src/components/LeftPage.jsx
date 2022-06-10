@@ -29,7 +29,7 @@ const LeftPage = (props) => {
         </p>
       </div>
       <p className="absolute left-[40rem] bottom-[8rem] -rotate-1 -skew-y-1">
-        Page {props.currentPage.pageNumber}
+        Page {props.counter}
       </p>
     </>
   );

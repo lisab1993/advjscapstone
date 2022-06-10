@@ -30,15 +30,29 @@ const Game = () => {
   const getStoryData = async () => {
     try {
       //get the selected story and its pages
+      //make sure the first is page number 1, and the last is the highest page number
       const data = await axios.get(`http://localhost:1300/story/${game}`);
       const storyData = data.data;
+      const pagesData = storyData.pages;
+
+      
       setStory(storyData);
       setRips(storyData.ripsAllowed);
-
-      const pagesData = data.data.pages;
+      
+      // console.log(pagesData, 'pagesData')
       setPageCount(pagesData.length);
-      const last = pagesData.pop();
-      const first = pagesData.splice(0, 1)[0];
+      // const last = pagesData.pop();
+      let first = pagesData.filter((obj) => obj.pageNumber === 1)
+      first = first[0]
+      const firstIndex = pagesData.indexOf(first)
+      console.log(firstIndex)
+      let last = pagesData.filter((obj) => obj.pageNumber === pagesData.length)
+      last = last[0]
+      const lastIndex = pagesData.indexOf(last)
+      console.log(lastIndex)
+      pagesData.splice(firstIndex, 1)
+      pagesData.splice(lastIndex-1, 1)
+      // const first = pagesData.splice(0, 1)[0];
       setFirstPage(first);
       setCurrentPage(first);
       setLastPage(last);
@@ -50,7 +64,7 @@ const Game = () => {
 
   const checkStuff = async () => {
     //check state when a button is clicked
-    console.log(theme, "theme");
+    console.log(story, "story");
   };
 
   //The randInt and randomChoice functions were taken from class lemur's repo: https://tinyurl.com/muhbr72c
@@ -133,6 +147,7 @@ const Game = () => {
             currentPage={currentPage}
             hasChosen={hasChosen}
             judgeAnswer={judgeAnswer}
+            counter={counter}
           />
 
           {/* right page */}
@@ -143,10 +158,10 @@ const Game = () => {
       )}
 
       {/* winning screen */}
-      {rips > 0 && counter > pageCount && <WinningScreen theme={theme} />}
+      {rips > 0 && counter > pageCount && <WinningScreen winningStatement={story.winningStatement} theme={theme} />}
 
       {/* losing screen */}
-      {rips === 0 && <LosingScreen theme={theme} />}
+      {rips === 0 && <LosingScreen losingStatement = {story.losingStatement} theme={theme} />}
     </>
   );
 };

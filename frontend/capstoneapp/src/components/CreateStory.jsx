@@ -96,8 +96,8 @@ const CreateStory = (props) => {
     e.preventDefault();
     // console.log(storyState.title, "title");
     // console.log(user._id, "user id");
-    // console.log(storyState.private, "private");
-    // console.log(storyState.anonymous, "anon");
+    console.log(storyState.private, "private");
+    console.log(storyState.anonymous, "anon");
     // console.log(storyState.ripsAllowed, "rips");
     // console.log(storyState.storyPremise, "premise");
     console.log(storyState.themeSelection, "theme");
@@ -162,7 +162,7 @@ const CreateStory = (props) => {
         {/* private */}
         {/* radio buttons */}
         <div className="mb-5">
-          <p>Do you want others to be able to see your story?</p>
+          <p>Do you want your story to be private?</p>
           <span>Yes</span>
           <input
             type="radio"
@@ -184,27 +184,27 @@ const CreateStory = (props) => {
         {/* anonymous */}
         {/* conditional radio buttons */}
         {storyState.private ? (
-          <div className="mb-5">
-            <p>Do you want your story posted anonymously?</p>
-            <span>Yes</span>
-            <input
-              type="radio"
-              name="anonymous"
-              onChange={handleRadioBoolChange}
-              value="true"
-              checked={storyState.anonymous === true}
-            />
-            <span>No</span>
-            <input
-              type="radio"
-              name="anonymous"
-              onChange={handleRadioBoolChange}
-              value="false"
-              checked={storyState.anonymous === false}
-            />
-          </div>
-        ) : (
           <></>
+        ) : (
+          <div className="mb-5">
+          <p>Do you want your story posted anonymously?</p>
+          <span>Yes</span>
+          <input
+            type="radio"
+            name="anonymous"
+            onChange={handleRadioBoolChange}
+            value="true"
+            checked={storyState.anonymous === true}
+          />
+          <span>No</span>
+          <input
+            type="radio"
+            name="anonymous"
+            onChange={handleRadioBoolChange}
+            value="false"
+            checked={storyState.anonymous === false}
+          />
+        </div>
         )}
 
         {/* rips allowed */}

@@ -10,7 +10,7 @@ const QuickStartButton = () => {
     }
 
     return (
-        <button onClick={(event) => handleClick(event)}><Link to="/premise" >Quick Start -Space</Link></button>
+        <button onClick={(event) => handleClick(event)}><Link to="/premise" className="font-bold text-xl hover:text-2xl" >Falling Into Black Holes</Link></button>
         
     )
 }

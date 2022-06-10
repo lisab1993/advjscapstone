@@ -11,8 +11,8 @@ const Navbar = () => {
       <Link className="text-white my-auto" to="/">Home</Link>
       {!user && (
         <>
-          <Link to="/signup">Signup</Link>
-          <Link to="/login">Login</Link>
+          <Link className="text-white" to="/signup">Signup</Link>
+          <Link className="text-white" to="/login">Login</Link>
         </>
       )}
       {user && 
